@@ -1,0 +1,30 @@
+From cdbb489dd6d194c16cae546d63eacfc4251d82e0 Mon Sep 17 00:00:00 2001
+From: Rinigus <rinigus.git@gmail.com>
+Date: Sun, 6 Oct 2024 20:26:42 +0300
+Subject: [PATCH] Drop requirement on GlobalAccel
+
+---
+ CMakeLists.txt | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index da99bcb..c9c436b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -42,12 +42,7 @@ if (ANDROID)
+     find_package(Gradle REQUIRED)
+ endif()
+ 
+-if(NOT WIN32 AND NOT APPLE AND NOT ANDROID)
+-    find_package(KF6GlobalAccel ${KF_DEP_VERSION} REQUIRED)
+-    set(HAVE_KGLOBALACCEL TRUE)
+-else()
+-    set(HAVE_KGLOBALACCEL FALSE)
+-endif()
++set(HAVE_KGLOBALACCEL FALSE)
+ 
+ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiAddons")
+ 
+-- 
+2.45.2
+
