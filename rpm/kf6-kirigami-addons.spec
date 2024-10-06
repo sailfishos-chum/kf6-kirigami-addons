@@ -80,7 +80,7 @@ and header files for developing applications that use %{name}.
 %license LICENSES/
 %dir %{_kf6_qmldir}/org/kde
 %{_kf6_qmldir}/org/kde/kirigamiaddons
-%{_kf6_libdir}/libKirigamiAddonsStatefulApp.so.{6,%{version}}
+%{_kf6_libdir}/libKirigamiAddonsStatefulApp.so.*
 
 %files devel
 %{_kf6_libdir}/cmake/KF6KirigamiAddons
