@@ -22,6 +22,7 @@ BuildRequires:  kf6-ki18n-devel
 BuildRequires:  kf6-kconfig-devel
 BuildRequires:  kf6-kcoreaddons-devel
 BuildRequires:  kf6-ksvg-devel
+BuildRequires:  kf6-kcolorscheme-devel
 
 BuildRequires:  qt6-qtbase-private-devel
 BuildRequires:  qt6-qtbase-devel
@@ -29,25 +30,6 @@ BuildRequires:  qt6-qtdeclarative-devel
 
 Provides:  kf6-kirigami2-addons = 1:%{version}-%{release}
 Provides:  kf6-kirigami2-addons%{?_isa} = 1:%{version}-%{release}
-
-# ### Merged subpackages back into main package
-# # The old name
-# Obsoletes: kf6-kirigami2-addons-dateandtime < 1:0.11.76-5
-# Provides:  kf6-kirigami2-addons-dateandtime = 1:%{version}-%{release}
-# Provides:  kf6-kirigami2-addons-dateandtime%{?_isa} = 1:%{version}-%{release}
-
-# Obsoletes: kf6-kirigami2-addons-treeview < 1:0.11.76-5
-# Provides:  kf6-kirigami2-addons-treeview = 1:%{version}-%{release}
-# Provides:  kf6-kirigami2-addons-treeview%{?_isa} = 1:%{version}-%{release}
-
-# # The new name
-# Obsoletes: kf6-kirigami-addons-dateandtime < 0.11.76-5
-# Provides:  kf6-kirigami-addons-dateandtime = %{version}-%{release}
-# Provides:  kf6-kirigami-addons-dateandtime%{?_isa} = %{version}-%{release}
-
-# Obsoletes: kf6-kirigami-addons-treeview < 0.11.76-5
-# Provides:  kf6-kirigami-addons-treeview = %{version}-%{release}
-# Provides:  kf6-kirigami-addons-treeview%{?_isa} = %{version}-%{release}
 
 %description
 A set of "widgets" i.e visual end user components along with a
