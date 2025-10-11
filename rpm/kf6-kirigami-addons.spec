@@ -64,9 +64,14 @@ and header files for developing applications that use %{name}.
 %dir %{_kf6_qmldir}/org/kde
 %{_kf6_qmldir}/org/kde/kirigamiaddons
 %{_kf6_libdir}/libKirigamiAddonsStatefulApp.so.*
+%{_kf6_libdir}/libKirigamiApp.so.*
+%{_kf6_libdir}/libKirigamiApp.so.6
 
 %files devel
+%{_kf6_libdir}/libKirigamiApp.so
+%{_includedir}/KirigamiAddons/
 %{_kf6_libdir}/cmake/KF6KirigamiAddons
 %{_kf6_libdir}/libKirigamiAddonsStatefulApp.so
 %{_includedir}/KirigamiAddonsStatefulApp/
 %{_kf6_datadir}/kdevappwizard/templates/kirigamiaddons6.tar.bz2
+%{_kf6_datadir}/kdevappwizard/templates/librarymanager6.tar.bz2
