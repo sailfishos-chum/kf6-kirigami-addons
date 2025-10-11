@@ -8,7 +8,7 @@ Summary:        Convergent visual components ("widgets") for Kirigami-based appl
 Url:            https://invent.kde.org/libraries/kirigami-addons
 Source0: %{name}-%{version}.tar.bz2
 
-Patch0: 0001-Drop-requirement-on-GlobalAccel.patch
+Patch0: 0001-Add-SailfisOS.patch
 
 BuildRequires:  cmake
 BuildRequires:  kf6-extra-cmake-modules >= %{kf_version}
@@ -51,7 +51,7 @@ and header files for developing applications that use %{name}.
 %autosetup -n %{name}-%{version}/upstream -p1
 
 %build
-%cmake_kf6 -DBUILD_WITH_QT6=ON
+%cmake_kf6 -DBUILD_WITH_QT6=ON -DSAILFISHOS=ON
 %cmake_build
 
 %install

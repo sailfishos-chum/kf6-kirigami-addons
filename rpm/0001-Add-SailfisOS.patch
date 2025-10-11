@@ -1,0 +1,81 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 70bb5263..b2c02e7a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -12,6 +12,8 @@ set(AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami)
+ set(QT_REQUIRED_VERSION "6.7.0")
+ set(KF_MIN_VERSION "6.16.0")
+ 
++option(SAILFISHOS "Build for SailfishOS" OFF)
++
+ find_package(ECM ${KF_MIN_VERSION} NO_MODULE)
+ set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://projects.kde.org/projects/kdesupport/extra-cmake-modules")
+ 
+@@ -41,11 +43,14 @@ if (BUILD_TESTING)
+ endif()
+ if (ANDROID)
+     find_package(Gradle REQUIRED)
++elseif(SAILFISHOS)
++    add_definitions( -DSAILFISHOS=1 )
++    find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS IconThemes)
+ else()
+     find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Crash IconThemes)
+ endif()
+ 
+-if(NOT WIN32 AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
++if(NOT WIN32 AND NOT APPLE AND NOT ANDROID AND NOT HAIKU AND NOT SAILFISHOS)
+     find_package(KF6GlobalAccel ${KF_MIN_VERSION} REQUIRED)
+     set(HAVE_KGLOBALACCEL TRUE)
+ else()
+diff --git a/src/app/CMakeLists.txt b/src/app/CMakeLists.txt
+index 86188d44..5df3fa2c 100644
+--- a/src/app/CMakeLists.txt
++++ b/src/app/CMakeLists.txt
+@@ -18,7 +18,9 @@ target_link_libraries(KirigamiApp PRIVATE
+     KF6::I18n
+     KF6::ColorScheme
+ )
+-if(NOT ANDROID)
++if (SAILFISHOS)
++    target_link_libraries(KirigamiApp PRIVATE KF6::IconThemes)
++elseif(NOT ANDROID)
+     target_link_libraries(KirigamiApp PRIVATE KF6::Crash KF6::IconThemes)
+ endif()
+ 
+diff --git a/src/app/kirigamiapp.cpp b/src/app/kirigamiapp.cpp
+index 0521b301..f36fb067 100644
+--- a/src/app/kirigamiapp.cpp
++++ b/src/app/kirigamiapp.cpp
+@@ -14,10 +14,13 @@
+ #include <kcoreaddons_version.h>
+ 
+ #ifndef Q_OS_ANDROID
+-#include <KCrash>
+ #include <KIconTheme>
+ #endif
+ 
++#if !defined(Q_OS_ANDROID) && !defined(SAILFISHOS)
++#include <KCrash>
++#endif
++
+ #ifdef Q_OS_WINDOWS
+ #include <QFont>
+ #include <Windows.h>
+@@ -42,7 +45,7 @@ KirigamiApp::KirigamiApp()
+     // Needed when not running with the Plasma QPlatformTheme to ensure colours get initialised
+     KColorSchemeManager::instance();
+ 
+-#ifdef Q_OS_ANDROID
++#if defined(Q_OS_ANDROID) || defined(SAILFISHOS)
+     // We don't want the QtWidgets dependency on Android, so we use qqc2-breeze-style there.
+     // Icons ought to be included with the app on CMake
+     QQuickStyle::setStyle(u"org.kde.breeze"_s);
+@@ -67,7 +70,7 @@ KirigamiApp::KirigamiApp()
+     qGuiApp->setFont(font);
+ #endif
+ 
+-#ifndef Q_OS_ANDROID
++#if !defined(Q_OS_ANDROID) && !defined(SAILFISHOS)
+ #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(6, 19, 0)
+     // Embrace KCrash. If an application misbehaves, we should know as much as possible about it.
+     // Needs initialising KAboutData::setApplicationData
