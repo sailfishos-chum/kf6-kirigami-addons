@@ -23,6 +23,7 @@ BuildRequires:  kf6-kconfig-devel
 BuildRequires:  kf6-kcoreaddons-devel
 BuildRequires:  kf6-ksvg-devel
 BuildRequires:  kf6-kcolorscheme-devel
+BuildRequires:  kf6-kiconthemes-devel
 
 BuildRequires:  qt6-qtbase-private-devel
 BuildRequires:  qt6-qtbase-devel

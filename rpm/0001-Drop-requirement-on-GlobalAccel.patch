@@ -1,9 +1,13 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 70bb5263..ba23fa1a 100644
+index 70bb5263..adea165c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -45,12 +45,7 @@ else()
-     find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Crash IconThemes)
+@@ -42,15 +42,10 @@ endif()
+ if (ANDROID)
+     find_package(Gradle REQUIRED)
+ else()
+-    find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Crash IconThemes)
++    find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS IconThemes)
  endif()
  
 -if(NOT WIN32 AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
